@@ -1,0 +1,21 @@
+# 日志配置模板
+# 提示：
+# 1.该配置只是建议性质库本身不包含配置解析。
+# 2.该库不支持自定义模板格式化，只能使用编码扩展的方式。
+
+[logs]
+level            = "DEBUG"              # 记录日志级别：DEBUG,INFO,WARN,ERROR,FATAL
+
+[logs.handler.file]
+path             = "/some/dir/log"      # 日志文件存放路径，文件名规则为：${TIME}/[${PREFIX}|${LEVEL}.].log
+path_time_format = "%Y%m%d"             # 日志存放子路径格式。空字符串表示不使用子目录。完整表达式：%Y年 %m月 %d日 %H时 %M分 %S秒 %z时区
+rotate_size      = 10240                # 日志轮转大小。0 表示不限制单个文件大小。单位：字节。
+format_type      = "json"               # 发送日志的格式，目前只支持 json和text 。
+time_format      = "%Y-%m-%d %H:%M:%S"  # 日期格式化。以本地化时区格式化。
+append_delimiter = "\n"                 # 追加日志分隔符。
+
+[logs.handler.net]
+protocol         = "ipv4.udp"           # 日志收集服务器协议。
+hostname         = "127.0.0.1:20000"    # 日志收集服务器地址。
+format_type      = "json"               # 发送日志的格式，目前只支持 json和text 。
+time_format      = "timestamp"          # 日期格式化。保持 unix 时间戳。
