@@ -14,7 +14,7 @@ type NetHandler struct {
 
 func (h *NetHandler) Init() (err error) {
 	if h.Protocol == "" {
-		h.Protocol = "ipv4.udp"
+		h.Protocol = "udp"
 	}
 	if h.FormatType == "" {
 		h.FormatType = "json"
@@ -22,6 +22,8 @@ func (h *NetHandler) Init() (err error) {
 	h.TimeFormat = replaceTimeFormat(h.TimeFormat)
 
 	switch h.Protocol {
+	case "udp":
+		fallthrough
 	case "ipv4.udp":
 		fallthrough
 	case "ipv6.udp":
@@ -29,12 +31,7 @@ func (h *NetHandler) Init() (err error) {
 	default:
 		err = errors.New("logs.NetHandler: not support protocol")
 	}
-
-	if err != nil {
-		return
-	}
-
-	return nil
+	return
 }
 
 func (h *NetHandler) Handle(v Entry) (err error) {

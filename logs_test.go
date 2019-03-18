@@ -1,10 +1,16 @@
 package logs_test
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
 	"github.com/junhwong/go-logs"
 )
+
+func TestX(t *testing.T) {
+	fmt.Println("x")
+}
 
 func TestConsole(t *testing.T) {
 	logs.Print("HELLO WORLD!")
@@ -39,12 +45,12 @@ func TestUDP(t *testing.T) {
 			FormatType: "json",
 			TimeFormat: "timestamp",
 		},
-		Hostname: "192.168.3.6:20001",
+		Hostname: "192.168.3.6:9527",
 		Protocol: "ipv4.udp",
 	}
 	logs.Std().Append(&h)
 	logs.Error("test log2")
 	logs.Error("test log3")
 	logs.Prefix("redis.box").Error("test log4")
-
+	time.Sleep(1000 * time.Second)
 }

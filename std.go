@@ -101,6 +101,7 @@ func (l *StandardLogger) Filter(v Entry) Entry {
 	}
 	return v
 }
+
 func (l *StandardLogger) SetLevel(v Level) {
 	l.level = v
 }
@@ -114,7 +115,7 @@ func (l *StandardLogger) GracefulStop() {
 func New() *StandardLogger {
 	l := &StandardLogger{
 		Mutex:    new(sync.Mutex),
-		stream:   make(chan Entry),
+		stream:   make(chan Entry, 1024*4),
 		wg:       &sync.WaitGroup{},
 		handlers: []Handler{},
 		level:    -1,
