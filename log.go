@@ -35,7 +35,7 @@ func (e Entry) get(k string, defaultValue interface{}) interface{} {
 	return v
 }
 func (e Entry) log(l Level, msg string) {
-	logger := e.get("__$logger", std).(Logger)
+	logger := e.get("__$logger", std).(*StandardLogger)
 	e.Level(l)
 	e.Message(msg)
 	logger.Log(e)

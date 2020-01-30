@@ -1,7 +1,7 @@
 package logs_test
 
 import (
-	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -9,7 +9,16 @@ import (
 )
 
 func TestX(t *testing.T) {
-	fmt.Println("x")
+	m := &logs.SortedMap{Less: strings.Compare}
+	m.Set("a", "va")
+	m.Set("c", "vc")
+	m.Set("b", "vb")
+	m.Set("c2", "vc2")
+	m.Set("日志", "日志")
+	m.Set("你好", "你好")
+
+	t.Log(m.Keys)
+	t.Log(m.Values)
 }
 
 func TestConsole(t *testing.T) {
